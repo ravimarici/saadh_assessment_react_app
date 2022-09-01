@@ -17,7 +17,7 @@ function Navigation() {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="/" onClick={handleClick}>{localStorage.getItem("username")}</a>
+            Signed in as user: <a href="/" onClick={handleClick}>{localStorage.getItem("username")}</a>
           </Navbar.Text>
         </Navbar.Collapse>
     </Navbar>

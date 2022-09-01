@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
@@ -21,6 +21,7 @@ const getDatafromLS = () => {
 function Home() {
   const [blogs, setBlogs] = useState(getDatafromLS());
   const [show, setShow] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -31,28 +32,30 @@ function Home() {
   const handleViewClose = () => setBlogShow(false);
 
   /**This method is to create a Blog and save in localstorage */
-  const createBlog = (e) => {
-    let blog = {
-      blogid: Math.floor(Math.random() * 100) + 1,
-      title,
-      content,
-    };
-    setBlogs([...blogs, blog]);
-    setTitle("");
-    setContent("");
+  const createBlog = () => {
+    if (title !== "" && content !== "") {
+      let blog = {
+        blogid: Math.floor(Math.random() * 100) + 1,
+        title,
+        content,
+      };
+      blogs.push(blog);
+      localStorage.setItem("blogs", JSON.stringify(blogs));
+      setTitle("");
+      setContent("");
+      handleClose(true);
+    } else {
+      setValidated(true);
+    }
+    
   };
-
-  // saving data to local storage
-  useEffect(() => {
-    localStorage.setItem("blogs", JSON.stringify(blogs));
-  }, [blogs]);
 
   return (
     <div>
       <Container>
         {/** This is for Navigation  */}
         <Navigation />
-
+        <hr></hr>
         {/* Table */}
 
         <Table striped bordered hover>
@@ -66,51 +69,23 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>JavaScript</td>
-              <td>Work on the JS class</td>
-              <td>
-                <Button variant="info" onClick={handleViewShow}>
-                  <BsPencilSquare />
-                </Button>
-              </td>
-              <td>
-                <Button variant="danger">
-                  <BsTrash />
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Angular</td>
-              <td>Work on the Angular class</td>
-              <td>
-                <Button variant="info" onClick={handleViewShow}>
-                  <BsPencilSquare />
-                </Button>
-              </td>
-              <td>
-                <Button variant="danger">
-                  <BsTrash />
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>React Native</td>
-              <td>Work on the React class</td>
-              <td>
-                <Button variant="info" onClick={handleViewShow}>
-                  <BsPencilSquare />
-                </Button>
-              </td>
-              <td>
-                <Button variant="danger">
-                  <BsTrash />
-                </Button>
-              </td>
-            </tr>
+            {blogs.map((blog) => (
+              <tr>
+                <td>{blog.blogid}</td>
+                <td>{blog.title}</td>
+                <td>{blog.content}</td>
+                <td>
+                  <Button variant="info" onClick={handleViewShow}>
+                    <BsPencilSquare />
+                  </Button>
+                </td>
+                <td>
+                  <Button variant="danger">
+                    <BsTrash />
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
 
@@ -119,6 +94,7 @@ function Home() {
         <Button variant="primary" onClick={handleShow}>
           Create Blog
         </Button>
+
         <Modal
           show={show}
           onHide={handleClose}
@@ -130,7 +106,7 @@ function Home() {
           </Modal.Header>
 
           <Modal.Body>
-            <Form>
+            <Form noValidate validated={validated}>
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
@@ -142,12 +118,16 @@ function Home() {
                   name="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Title is required
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group
                 className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
+                controlId="exampleForm.ControlTextarea2"
               >
                 <Form.Label>Blog Content</Form.Label>
 
@@ -157,18 +137,19 @@ function Home() {
                   name="content"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Content is required
+                </Form.Control.Feedback>
               </Form.Group>
+
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
 
-                <Button
-                  id="create"
-                  variant="primary"
-                  onSubmit={(e) => createBlog()}
-                >
+                <Button id="create" variant="primary" onClick={createBlog}>
                   Create
                 </Button>
               </Modal.Footer>

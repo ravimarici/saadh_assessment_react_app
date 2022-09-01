@@ -11,23 +11,23 @@ function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const localStorageUser = localStorage.getItem("username");
-  const localStoragePass = localStorage.getItem("password");
+  const getUsername = localStorage.getItem("username");
+  const getPassword = localStorage.getItem("password");
 
   const handleSubmit = () => {
     if (username !== "" && password !== "") {
       localStorage.setItem("username", username);
       localStorage.setItem("password", password);
       navigate("/home");
-    }else{
-      setValidated(true)
+    } else {
+      setValidated(true);
     }
   };
 
   return (
     <div>
       <Container>
-        {localStorageUser && localStoragePass ? (
+        {getUsername && getPassword ? (
           <Home />
         ) : (
           <Form noValidate validated={validated}>
@@ -54,6 +54,7 @@ function SignIn() {
                 Password is required
               </Form.Control.Feedback>
             </Form.Group>
+
             <Button variant="primary" onClick={handleSubmit}>
               LogIn
             </Button>
