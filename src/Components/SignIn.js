@@ -57,9 +57,6 @@ function SignIn() {
             <Button variant="primary" onClick={handleSubmit}>
               LogIn
             </Button>
-            <Button variant="primary">
-              LogIn
-            </Button>
           </Form>
         )}
       </Container>
