@@ -4,8 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
-import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import Navigation from "./Navigation";
+import { View } from "./View";
 
 // getting the values of local storage
 const getDatafromLS = () => {
@@ -47,7 +47,6 @@ function Home() {
     } else {
       setValidated(true);
     }
-    
   };
 
   return (
@@ -68,27 +67,10 @@ function Home() {
               <th>Delete</th>
             </tr>
           </thead>
-          <tbody>
-            {blogs.map((blog) => (
-              <tr>
-                <td>{blog.blogid}</td>
-                <td>{blog.title}</td>
-                <td>{blog.content}</td>
-                <td>
-                  <Button variant="info" onClick={handleViewShow}>
-                    <BsPencilSquare />
-                  </Button>
-                </td>
-                <td>
-                  <Button variant="danger">
-                    <BsTrash />
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+          {/** This for View blog */}
 
+          <View blogs={blogs} />
+        </Table>
         {/* Create popup */}
         <hr></hr>
         <Button variant="primary" onClick={handleShow}>
