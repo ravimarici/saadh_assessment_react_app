@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Table from "react-bootstrap/Table";
 import Navigation from "./Navigation";
 import { View } from "./View";
 
@@ -54,25 +53,16 @@ function Home() {
       <Container>
         {/** This is for Navigation  */}
         <Navigation />
+
         <hr></hr>
+
         {/* Table */}
+        <View blogs={blogs} />
 
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Blog Title</th>
-              <th>Blog Content</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          {/** This for View blog */}
-
-          <View blogs={blogs} />
-        </Table>
         {/* Create popup */}
+
         <hr></hr>
+
         <Button variant="primary" onClick={handleShow}>
           Create Blog
         </Button>
