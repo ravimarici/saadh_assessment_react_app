@@ -79,6 +79,7 @@ function Home() {
         <hr></hr>
 
         {/* Table */}
+        {/* Receiving props  */}
         <View blogs={blogs} updateSaadh={updateRavi} deleteBlog={deleteBlog} />
 
         {/* Create popup */}

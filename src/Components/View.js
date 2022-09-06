@@ -5,12 +5,14 @@ import Table from "react-bootstrap/Table";
 import Edit from "./Edit";
 
 export const View = ({ blogs, updateSaadh, deleteBlog }) => {
+
+  //
   const updateBlog = (key, title, content) => {
     console.log("saadh");
     updateSaadh(key, title, content);
   };
 
-  // props
+  // Passing the props for deleting
   const removeItem = (blogid) => {
     deleteBlog(blogid)
   }
