@@ -21,14 +21,11 @@ function Home() {
   const [blogs, setBlogs] = useState(getDatafromLS());
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [blogShow, setBlogShow] = useState(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleViewShow = () => setBlogShow(true);
-  const handleViewClose = () => setBlogShow(false);
 
   /**This method is to create a Blog and save in localstorage */
   const createBlog = () => {
@@ -48,6 +45,31 @@ function Home() {
     }
   };
 
+  // This method for Edit & Update method
+  const updateRavi = (blogid, title, content) => {
+    
+    const tempList = [...blogs];
+    const deletedList = tempList.filter((blog) => blog.blogid !== blogid);
+    let editedBlog = {
+      blogid,
+      title,
+      content
+    };
+    deletedList.push(editedBlog);
+    setBlogs(deletedList);
+    localStorage.setItem("blogs", JSON.stringify(deletedList));
+  
+  };
+
+  // Deleting blogs from Local Storage
+  const deleteBlog = (blogid) => {
+    console.log(blogid);
+    const filterBlogs = blogs.filter((element,index) => {
+      return element.blogid !== blogid;
+    });
+    setBlogs(filterBlogs);
+  };
+
   return (
     <div>
       <Container>
@@ -57,7 +79,7 @@ function Home() {
         <hr></hr>
 
         {/* Table */}
-        <View blogs={blogs} />
+        <View blogs={blogs} updateSaadh={updateRavi} deleteBlog={deleteBlog} />
 
         {/* Create popup */}
 
@@ -66,6 +88,7 @@ function Home() {
         <Button variant="primary" onClick={handleShow}>
           Create Blog
         </Button>
+        <hr></hr>
 
         <Modal
           show={show}
@@ -127,43 +150,6 @@ function Home() {
               </Modal.Footer>
             </Form>
           </Modal.Body>
-        </Modal>
-
-        {/* View Blog */}
-
-        <Modal
-          show={blogShow}
-          onHide={handleViewClose}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Blog</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Blog Title</Form.Label>
-                <Form.Control type="text" autoFocus />
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Label>Blog Content</Form.Label>
-                <Form.Control as="textarea" rows={3} />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleViewClose}>
-              Close
-            </Button>
-            <Button variant="primary">Update</Button>
-          </Modal.Footer>
         </Modal>
       </Container>
     </div>

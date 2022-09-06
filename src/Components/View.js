@@ -1,9 +1,20 @@
 import React from "react";
-import { BsPencilSquare, BsTrash } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 import Button from "react-bootstrap/esm/Button";
 import Table from "react-bootstrap/Table";
+import Edit from "./Edit";
 
-export const View = ({ blogs }) => {
+export const View = ({ blogs, updateSaadh, deleteBlog }) => {
+  const updateBlog = (key, title, content) => {
+    console.log("saadh");
+    updateSaadh(key, title, content);
+  };
+
+  // props
+  const removeItem = (blogid) => {
+    deleteBlog(blogid)
+  }
+
   return (
     <Table striped bordered hover>
       <thead>
@@ -23,12 +34,15 @@ export const View = ({ blogs }) => {
               <td>{blog.title}</td>
               <td>{blog.content}</td>
               <td>
-                <Button variant="info">
-                  <BsPencilSquare />
-                </Button>
+                <Edit
+                  blogid={blog.blogid}
+                  title={blog.title}
+                  content={blog.content}
+                  updateBlog={updateBlog}
+                />
               </td>
               <td>
-                <Button variant="danger">
+                <Button variant="danger" onClick={() => removeItem(blog.blogid)}>
                   <BsTrash />
                 </Button>
               </td>
