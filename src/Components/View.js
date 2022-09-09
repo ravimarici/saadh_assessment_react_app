@@ -6,7 +6,7 @@ import Edit from "./Edit";
 
 export const View = ({ blogs, updateSaadh, deleteBlog }) => {
 
-  //
+  // Sending props to Editing
   const updateBlog = (key, title, content) => {
     console.log("saadh");
     updateSaadh(key, title, content);

@@ -62,6 +62,7 @@ function Home() {
   };
 
   // Deleting blogs from Local Storage
+  
   const deleteBlog = (blogid) => {
     console.log(blogid);
     const filterBlogs = blogs.filter((element,index) => {
