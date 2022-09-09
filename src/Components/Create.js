@@ -6,13 +6,13 @@ import { View } from "./View";
 
 // getting the values of local storage
 const getDatafromLS = () => {
-    const data = localStorage.getItem("blogs");
-    if (data) {
-      return JSON.parse(data);
-    } else {
-      return [];
-    }
-  };
+  const data = localStorage.getItem("blogs");
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return [];
+  }
+};
 
 function Create() {
   const [blogs, setBlogs] = useState(getDatafromLS());
@@ -24,7 +24,7 @@ function Create() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-/**This method is to create a Blog and save in localstorage */
+  /**This method is to create a Blog and save in localstorage */
   const createBlog = () => {
     if (title !== "" && content !== "") {
       let blog = {
@@ -42,7 +42,7 @@ function Create() {
     }
   };
 
-   // This method for Edit & Update method
+  // This method for Edit & Update method
   const updatedBlog = (blogid, title, content) => {
     const tempList = [...blogs];
     const deletedList = tempList.filter((blog) => blog.blogid !== blogid);
@@ -66,7 +66,12 @@ function Create() {
   };
   return (
     <div>
+      {/* Table */}
+      {/* Receiving props  */}
       <View blogs={blogs} receiveBlog={updatedBlog} deleteBlog={deleteBlog} />
+
+      {/* Create Popup */}
+
       <Button variant="primary" onClick={handleShow}>
         Create Blog
       </Button>
