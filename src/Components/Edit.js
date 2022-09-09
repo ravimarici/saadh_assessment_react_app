@@ -16,7 +16,7 @@ function Edit({ blogid, title, content, updateBlog }) {
   const editBlog = () => {
     updateBlog(blogid, editTitle, editContent);
     setValidated(true);
-    setShow(false)
+    setShow(false);
   };
 
   return (
@@ -28,66 +28,63 @@ function Edit({ blogid, title, content, updateBlog }) {
       {/* View Blog */}
 
       <Modal
-          show={show}
-          onHide={handleEditClose}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Create Blog</Modal.Title>
-          </Modal.Header>
+        show={show}
+        onHide={handleEditClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Create Blog</Modal.Title>
+        </Modal.Header>
 
-          <Modal.Body>
-            <Form noValidate validated={validated}>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Blog Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  autoFocus
-                  name="editTitle"
-                  value={editTitle}
-                  onChange={(e) => setEditTitle(e.target.value)}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Title is required
-                </Form.Control.Feedback>
-              </Form.Group>
+        <Modal.Body>
+          <Form noValidate validated={validated}>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Blog Title</Form.Label>
+              <Form.Control
+                type="text"
+                autoFocus
+                name="editTitle"
+                value={editTitle}
+                onChange={(e) => setEditTitle(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Title is required
+              </Form.Control.Feedback>
+            </Form.Group>
 
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea2"
-              >
-                <Form.Label>Blog Content</Form.Label>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea2"
+            >
+              <Form.Label>Blog Content</Form.Label>
 
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  name="editContent"
-                  value={editContent}
-                  onChange={(e) => setEditContent(e.target.value)}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Content is required
-                </Form.Control.Feedback>
-              </Form.Group>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="editContent"
+                value={editContent}
+                onChange={(e) => setEditContent(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Content is required
+              </Form.Control.Feedback>
+            </Form.Group>
 
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleEditClose}>
-                  Close
-                </Button>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleEditClose}>
+                Close
+              </Button>
 
-                <Button id="create" variant="primary" onClick={editBlog}>
-                  Update
-                </Button>
-              </Modal.Footer>
-            </Form>
-          </Modal.Body>
-        </Modal>
+              <Button id="create" variant="primary" onClick={editBlog}>
+                Update
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

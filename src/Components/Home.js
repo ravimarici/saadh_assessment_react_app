@@ -3,22 +3,8 @@ import Container from "react-bootstrap/Container";
 import Navigation from "./Navigation";
 import Create from "./Create";
 
-
-
-
 /**This is Home Page Component  */
 function Home() {
- 
-
- 
-
-
- 
- 
-
-  
-
-
   return (
     <div>
       <Container>
@@ -27,15 +13,8 @@ function Home() {
 
         <hr></hr>
 
-        {/* Table */}
-        {/* Receiving props  */}
-        
-
-        {/* Create popup */}
-
-        <hr></hr>
-
-        <Create/>
+        {/* This is for Creating Blog and View Blog */}
+        <Create />
       </Container>
     </div>
   );

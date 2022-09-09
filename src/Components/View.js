@@ -5,7 +5,6 @@ import Table from "react-bootstrap/Table";
 import Edit from "./Edit";
 
 export const View = ({ blogs, receiveBlog, deleteBlog }) => {
-
   // Sending props to Editing
   const updateBlog = (key, title, content) => {
     console.log("saadh");
@@ -14,8 +13,8 @@ export const View = ({ blogs, receiveBlog, deleteBlog }) => {
 
   // Passing the props for deleting
   const removeItem = (blogid) => {
-    deleteBlog(blogid)
-  }
+    deleteBlog(blogid);
+  };
 
   return (
     <Table striped bordered hover>
@@ -44,7 +43,10 @@ export const View = ({ blogs, receiveBlog, deleteBlog }) => {
                 />
               </td>
               <td>
-                <Button variant="danger" onClick={() => removeItem(blog.blogid)}>
+                <Button
+                  variant="danger"
+                  onClick={() => removeItem(blog.blogid)}
+                >
                   <BsTrash />
                 </Button>
               </td>
