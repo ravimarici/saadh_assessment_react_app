@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { View } from "./View";
+import Form from "react-bootstrap/Form";
 
-// getting the values of local storage
-const getDatafromLS = () => {
-  const data = localStorage.getItem("blogs");
-  if (data) {
-    return JSON.parse(data);
-  } else {
-    return [];
-  }
-};
+export const Create = ({ createdBlog }) => {
+  const createList = () => {
+    createdBlog(title, content);
+    setValidated(true);
+    setShow(true);
+    handleClose(true);
+  };
 
-function Create() {
-  const [blogs, setBlogs] = useState(getDatafromLS());
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState("");
@@ -23,55 +18,8 @@ function Create() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  /**This method is to create a Blog and save in localstorage */
-  const createBlog = () => {
-    if (title !== "" && content !== "") {
-      let blog = {
-        blogid: Math.floor(Math.random() * 100) + 1,
-        title,
-        content,
-      };
-      blogs.push(blog);
-      localStorage.setItem("blogs", JSON.stringify(blogs));
-      setTitle("");
-      setContent("");
-      handleClose(true);
-    } else {
-      setValidated(true);
-    }
-  };
-
-  // This method for Edit & Update method
-  const updatedBlog = (blogid, title, content) => {
-    const tempList = [...blogs];
-    const deletedList = tempList.filter((blog) => blog.blogid !== blogid);
-    let editedBlog = {
-      blogid,
-      title,
-      content,
-    };
-    deletedList.push(editedBlog);
-    setBlogs(deletedList);
-    localStorage.setItem("blogs", JSON.stringify(deletedList));
-  };
-
-  // Deleting blogs from Local Storage
-  const deleteBlog = (blogid) => {
-    console.log(blogid);
-    const filterBlogs = blogs.filter((element, index) => {
-      return element.blogid !== blogid;
-    });
-    setBlogs(filterBlogs);
-  };
   return (
     <div>
-      {/* Table */}
-      {/* Receiving props  */}
-      <View blogs={blogs} receiveBlog={updatedBlog} deleteBlog={deleteBlog} />
-
-      {/* Create Popup */}
-
       <Button variant="primary" onClick={handleShow}>
         Create Blog
       </Button>
@@ -128,7 +76,7 @@ function Create() {
                 Close
               </Button>
 
-              <Button id="create" variant="primary" onClick={createBlog}>
+              <Button id="create" variant="primary" onClick={createList}>
                 Create
               </Button>
             </Modal.Footer>
@@ -137,6 +85,4 @@ function Create() {
       </Modal>
     </div>
   );
-}
-
-export default Create;
+};
