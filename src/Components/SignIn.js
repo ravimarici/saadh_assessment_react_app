@@ -28,7 +28,6 @@ function SignIn() {
   return (
     <div>
       <Container>
-      <Navigation />
       <hr></hr>
         {getUsername && getPassword ? (
           <Home />
