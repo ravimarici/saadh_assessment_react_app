@@ -4,7 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-function Edit({ blogid, title, content, updateBlog }) {
+function Edit({ blogid, title, content, updateSaadh }) {
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
@@ -14,7 +14,7 @@ function Edit({ blogid, title, content, updateBlog }) {
   const handleEditClose = () => setShow(false);
 
   const editBlog = () => {
-    updateBlog(blogid, editTitle, editContent);
+    updateSaadh(blogid, editTitle, editContent);
     setValidated(true);
     setShow(false);
   };
@@ -44,7 +44,6 @@ function Edit({ blogid, title, content, updateBlog }) {
               <Form.Control
                 type="text"
                 autoFocus
-                name="editTitle"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
                 required
@@ -63,7 +62,6 @@ function Edit({ blogid, title, content, updateBlog }) {
               <Form.Control
                 as="textarea"
                 rows={3}
-                name="editContent"
                 value={editContent}
                 onChange={(e) => setEditContent(e.target.value)}
                 required
