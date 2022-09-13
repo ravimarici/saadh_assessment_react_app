@@ -5,10 +5,17 @@ import Form from "react-bootstrap/Form";
 
 export const Create = ({ createdBlog }) => {
   const createList = () => {
-    createdBlog(title, content);
-    setValidated(true);
-    setShow(true);
-    handleClose(true);
+    if (title !== "" && content !== "") {
+      createdBlog(title, content);
+      setShow(false);
+      setTitle("");
+      setContent("");
+    }
+    else {
+      setValidated(true);
+    }
+    
+
   };
 
   const [show, setShow] = useState(false);
