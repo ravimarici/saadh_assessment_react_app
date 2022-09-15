@@ -7,7 +7,6 @@ import Edit from "./Edit";
 export const View = ({ blogs, receiveBlog, deleteBlog }) => {
   // Sending props to Editing
   const updateBlog = (key, title, content) => {
-    console.log("saadh");
     receiveBlog(key, title, content);
   };
 
@@ -36,10 +35,11 @@ export const View = ({ blogs, receiveBlog, deleteBlog }) => {
               <td>{blog.content}</td>
               <td>
                 <Edit
+                  //This method was Popup View
                   blogid={blog.blogid}
                   title={blog.title}
                   content={blog.content}
-                  updateBlog={updateBlog}
+                  updateSaadh={updateBlog}
                 />
               </td>
               <td>
