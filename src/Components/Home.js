@@ -17,8 +17,6 @@ const getDatafromLS = () => {
 /**This is Home Page Component  */
 function Home() {
   const [blogs, setBlogs] = useState(getDatafromLS());
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
 
   /**This method is to create a Blog and save in localstorage */
   const createBlog = (title, content) => {
@@ -28,13 +26,14 @@ function Home() {
         title,
         content,
       };
-      blogs.push(blog);
-      localStorage.setItem("blogs", JSON.stringify(blogs));
-      setTitle("");
-      setContent("");
+      const todotempList = [...blogs];
+      todotempList.push(blog);
+      todotempList.sort((a,b) => a.blogid - b.blogid);
+      setBlogs(todotempList);
+      localStorage.setItem("blogs", JSON.stringify(todotempList));
+      window.location.reload();
     }
   };
-
   // This method for Edit & Update method
   const updatedBlog = (blogid, title, content) => {
     const tempList = [...blogs];
@@ -45,18 +44,21 @@ function Home() {
       content,
     };
     deletedList.push(editedBlog);
+    deletedList.sort((a,b) => a.blogid - b.blogid);
     setBlogs(deletedList);
     localStorage.setItem("blogs", JSON.stringify(deletedList));
+    window.location.reload();
   };
 
   // Deleting blogs from Local Storage
   const deleteBlog = (blogid) => {
-    console.log(blogid);
     const filterBlogs = blogs.filter((element, index) => {
       return element.blogid !== blogid;
     });
+    filterBlogs.sort((a,b) => a.blogid - b.blogid);
     setBlogs(filterBlogs);
     localStorage.setItem("blogs", JSON.stringify(filterBlogs));
+    window.location.reload();
   };
 
   return (
