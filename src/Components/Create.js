@@ -10,12 +10,9 @@ export const Create = ({ createdBlog }) => {
       setShow(false);
       setTitle("");
       setContent("");
-    }
-    else {
+    } else {
       setValidated(true);
     }
-    
-
   };
 
   const [show, setShow] = useState(false);
